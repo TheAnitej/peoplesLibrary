@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.library.applicationstarter.dtos.JwtResponseDTO;
 import com.library.applicationstarter.dtos.LoginRequestDTO;
-import com.library.applicationstarter.entitys.UserCreds;
-import com.library.applicationstarter.repository.UserCredsRepo;
+import com.library.applicationstarter.service.AuthService;
 import com.library.applicationstarter.service.UserCredService;
-import com.library.applicationstarter.service.impl.UserCredServiceImpl;
 import com.library.applicationstarter.utils.JwtUtil;
+
 
 
 
@@ -38,22 +36,16 @@ public class AuthController {
     private JwtUtil jwtUtils;
 
     @Autowired
-    private UserCredServiceImpl credService;
+    private UserCredService credService;
 
     @Autowired
-    private UserCredsRepo userCredsRepo;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UserCredService userCredsService;
+    private AuthService authService;
 
 
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequestDTO loginRequest) {
-        logger.info("in authenticateUser method");
+        logger.info("in authenticateUser method..");
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -64,32 +56,61 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody LoginRequestDTO registerRequest) {
-        logger.info("in registerUser method");
-        // Check if user already exists
-        if (credService.loadUserByUsername(registerRequest.getUsername()) != null) {
+    public ResponseEntity<String> registerUser(@RequestBody LoginRequestDTO registerRequest) throws Exception {
+        logger.info("in registerUser method..");
+
+        try {
+            if(credService.registerUser(registerRequest)){
+                return ResponseEntity.ok("User registered successfully!");
+            }
             return ResponseEntity.badRequest().body("Error: Username is already taken!");
+        } catch (Exception e) {
+            throw new Exception("Error while registering user");
         }
-
-        // Create new user
-        UserCreds user = new UserCreds(registerRequest.getUsername(), passwordEncoder.encode(registerRequest.getPassword()));
-        userCredsRepo.save(user);
-
-        return ResponseEntity.ok("User registered successfully!");
+    
     }
 
     @GetMapping("/userExists")
     public ResponseEntity<Boolean> doesUsernameExists( String username) {
-        logger.info("in doesUsernameExists method");
+        logger.info("in doesUsernameExists method..");
         return ResponseEntity.ok(credService.doesUsernameExists(username));
         
     }
 
     @GetMapping("/verifyEmail")
-    public boolean postMethodName( String email) {
-        logger.info("in doesUsernameExists method");
-    return userCredsService.verifyEmail(email,1);
+    public void sendVerificationCode( String email) {
+        logger.info("in sendVerificationCode method..");
+        authService.sendVerificationCode(email);
     }
+
+    @PostMapping("/updatePassword")
+    public void updateUserPassword(String password, String email) throws Exception {
+        logger.info("In updateUserPassword methos...");
+        try {
+            authService.updateUserPassword(password, email);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Error while updating password. Try Email Verification again.");
+        }
+    }
+
+    @PostMapping("/addNewUser")
+    public void addNewUser(@RequestBody LoginRequestDTO request) throws Exception {
+        
+        try {
+            
+          authService.addNewUser(request);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Error while adding new user");
+        }
+        
+    }
+
+    // @post
+    
+    
 
     
 }

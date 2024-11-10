@@ -12,9 +12,10 @@ public class ApplicationConfigurer implements WebMvcConfigurer {
         registry.addMapping("/**")  // Apply CORS settings to all endpoints
                 .allowedOrigins("http://localhost:4200")  // Specify allowed origin (Angular app running on port 4200)
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Specify allowed HTTP methods
+                .allowedHeaders("*")  // Allow all headers
                 .exposedHeaders("Authorization") // Expose headers if you need to send JWT token back to the client
                 .allowCredentials(true) // Allow credentials like cookies, authorization headers
-                .maxAge(3600);  // Allow credentials (optional, depending on your use case)
+                .maxAge(3600);  // Allow credentials
     }
 
 }

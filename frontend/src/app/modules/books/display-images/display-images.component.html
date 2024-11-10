@@ -1,0 +1,23 @@
+<p-dialog header="Request Book" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <div class="row">
+        <div class="col-sm-8">
+            <b>Book Summary:</b> {{data?.summary}}
+            <br>
+            <b>Book Available for:</b> {{data?.lendBookFor}} Days
+            <br>
+            <b>Book Owned By:</b> {{data?.uploadedBy}} 
+        </div>
+        <div class="col-sm-4">
+            <button 
+    pButton 
+    pRipple 
+    label="Request Book" 
+    class="p-button-success">
+</button>
+        </div>
+    </div>
+
+
+
+</p-dialog>

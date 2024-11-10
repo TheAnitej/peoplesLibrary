@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,13 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
-  title = 'frontend';
+  title = 'Library';
+  sidebarVisible = false;
 
-  constructor(){
+  constructor(private route: ActivatedRoute, private router: Router){
 
   }
   ngOnInit(): void {
     this.title = 'People Library';
+    this.router.events.subscribe(() => {
+      this.sidebarVisible = this.router.url !== '/login/login';
+    });
   }
 
 

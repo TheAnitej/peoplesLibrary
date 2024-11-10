@@ -1,14 +1,31 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, PreloadingStrategy, RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent } from './modules/login/login-page/login-page.component';
-import { DashboardComponent } from './modules/dashboard/dashboard/dashboard.component';
+import { RouterModule, Routes } from '@angular/router';
+import { authGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
-  { path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m=>m.DashboardModule)},
-  { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  // { path: '**', redirectTo: '/login' }
-];
+      {
+        path: 'dashboard', loadChildren: () => import('./modules/books/books.module').then(m => m.BooksModule),
+        canActivate: [authGuard]
+      },
+      {
+        path: 'books', loadChildren: () => import('./modules/books/books.module').then(m => m.BooksModule),
+        canActivate: [authGuard]
+      },
+      {
+        path: 'messages', loadChildren: () => import('./modules/messages/messages.module').then(m => m.MessagesModule),
+        canActivate: [authGuard]
+      },
+      {
+        path: 'support', loadChildren: () => import('./modules/support/support.module').then(m => m.SupportModule),
+        canActivate: [authGuard]
+      },
+      {
+        path: 'settings', loadChildren: () => import('./modules/settings/settings.module').then(m => m.SettingsModule),
+        canActivate: [authGuard]
+      },
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: 'login', loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) }
+  ];
 
 
 @NgModule({

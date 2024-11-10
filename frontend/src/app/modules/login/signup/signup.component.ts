@@ -24,10 +24,25 @@ loading = false;
   load(){
     this.loading = !this.loading
     this.verified = true;
-    this._service.doesUserExist(this.emailid).subscribe((res)=>{
+    this._service.verifyEmail(this.emailid).subscribe((res)=>{
       this.olduser = res;
         this._alert.add({ severity: 'success', summary: 'Success', detail: 'Login Credentials have been sent to your email.' })
     })
     this.loading = !this.loading
   }
+
+  
 }
+
+@Component({
+  selector: 'app-verification-failed',
+  template:`<h1>Hello, World!</h1>
+    <p>This is an inline template.</p>`,
+  styleUrl: './signup.component.css'
+})
+export class VerificationFailedComponent{
+
+
+
+}
+

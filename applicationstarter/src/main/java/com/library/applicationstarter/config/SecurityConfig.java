@@ -38,15 +38,22 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-            .authorizeRequests(requests -> requests
-                .antMatchers("/login").permitAll()
-                .anyRequest().authenticated())  // All other endpoints require authentication
-            .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            // .and()
-            .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.csrf().disable()
+        .authorizeRequests()
+            .antMatchers("/auth/login", "/auth/verifyEmail", "/auth/updatePassword", "/auth/addNewUser")
+            .permitAll() // Publicly accessible endpoints
+            // .antMatchers("/api/**")
+            .anyRequest()
+            .authenticated() // Secure other API endpoints
+        .and()
+        .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Stateless session for JWT
+        .and()
+        .cors(); // Enable CORS for this configuration
 
-        return http.build();
+    http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
     }
 
     @Bean

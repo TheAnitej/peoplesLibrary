@@ -5,6 +5,7 @@ import { AlertModule } from '../../../shared/alert/alert.module';
 import { Message, MessageService } from 'primeng/api';
 import { AlertServiceService } from '../../../shared/alert/alert-service.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -16,22 +17,28 @@ export class LoginPageComponent {
   isloading = false;
   message : Message =  {severity: 'success', summary: 'Success', detail: 'Message Content' }
   ;
-  constructor(private fb: FormBuilder, private http: HttpClient,private messageService: MessageService,
+  constructor(private fb: FormBuilder, private http: HttpClient,private _alert: MessageService,private authService: AuthService,
      private router: Router
   ) {
+
+    sessionStorage.removeItem('token');
       this.registerForm = this.fb.group({
-          username: ['', Validators.required],
-          password: ['', [Validators.required, Validators.minLength(6)]]
+          username: [null, Validators.required],
+          password: [null, [Validators.required, Validators.minLength(6)]]
       });
   }
 
 load(){
-  // this.isloading = !this.isloading;
-  this.router.navigate(['/signup']);
-}
-handleClick(){
-  console.log('Navigating to Signup');
-  this.router.navigate(['/signup']);
+  const pwd = this.registerForm.controls['password'].value;
+    this.authService.login(this.registerForm.controls['username'].value, pwd).subscribe(
+      (res) => {
+        console.log('Login successful');
+      },
+      error => {
+        console.error('Login failed', error);
+        this._alert.add({ severity: 'error', summary: 'Login Failed', detail: 'Invalid Credentials.' })
+      }
+    );
 }
 
 }

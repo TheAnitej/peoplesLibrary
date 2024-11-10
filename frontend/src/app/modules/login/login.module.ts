@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginRoutingModule } from './login-routing.module';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModule } from '../../shared/alert/alert.module';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
@@ -13,14 +13,20 @@ import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { SignupComponent } from './signup/signup.component';
+import { SignupComponent, VerificationFailedComponent } from './signup/signup.component';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { ResetPasswordComponent, SignUpUserComponent } from './reset-password/reset-password.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   declarations: [
     LoginPageComponent,
-    SignupComponent
+    SignupComponent,
+    VerificationFailedComponent,
+    ResetPasswordComponent,
+    SignUpUserComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +34,7 @@ import { InputIconModule } from 'primeng/inputicon';
     ReactiveFormsModule,
     IconFieldModule,
     InputIconModule,
+    TagModule,
     ToastModule,
     ButtonModule,
     RippleModule,
@@ -36,8 +43,9 @@ import { InputIconModule } from 'primeng/inputicon';
     FormsModule,
     PasswordModule,
     FloatLabelModule,
+    FileUploadModule,
     CardModule],
-  providers: [MessageService, MessageService],
+  providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginModule { }
