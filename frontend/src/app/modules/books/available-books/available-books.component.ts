@@ -35,7 +35,6 @@ export class AvailableBooksComponent  implements OnInit{
 
   }
 
-
   rowSelected(row : any){
     console.log(row);
     this.visible = !this.visible;

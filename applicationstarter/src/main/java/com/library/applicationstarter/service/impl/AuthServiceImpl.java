@@ -22,6 +22,7 @@ import com.library.applicationstarter.repository.UserVerificationsRepo;
 import com.library.applicationstarter.repository.UsersRepo;
 import com.library.applicationstarter.service.AuthService;
 import com.library.applicationstarter.service.EmailService;
+import com.library.applicationstarter.service.SecurityContext;
 import com.library.applicationstarter.service.SequenceGeneratorService;
 
 @Service
@@ -43,6 +44,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private SequenceGeneratorService generatorService;
+
+    @Autowired
+    private SecurityContext securityContext;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -287,6 +291,25 @@ public class AuthServiceImpl implements AuthService {
         mailVariables.put("firstname",firstName);
 
         emailServices.sendEmail(email, template.getSubject(), template.getTemplatePath(), mailVariables);
+    }
+
+    @Override
+    public String getUserName() throws Exception {
+        
+        try {
+           Optional<Users> user =  usersRepo.findByUsername(securityContext.getLoggedInUsername());
+           if(user.isPresent()){
+            return user.get().getFirstName();
+           }else{
+            throw new Exception("Error while retriving username.");
+           }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+
+        
+
     }
 
 }

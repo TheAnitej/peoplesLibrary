@@ -6,6 +6,11 @@ import { SettingsDashboardComponent } from './settings-dashboard/settings-dashbo
 import { CardModule } from 'primeng/card';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Button } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -17,8 +22,13 @@ import { Button } from 'primeng/button';
     SettingsRoutingModule,
     CardModule,
     MultiSelectModule,
-    Button
+    Button,
+    PasswordModule,
+    ToastModule,
+    FormsModule,
+    ReactiveFormsModule
     ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  providers:[MessageService]
 })
 export class SettingsModule { }

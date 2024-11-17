@@ -3,8 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
+    {
+      path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
+      canActivate: [authGuard]
+    },
       {
-        path: 'dashboard', loadChildren: () => import('./modules/books/books.module').then(m => m.BooksModule),
+        path: 'books', loadChildren: () => import('./modules/books/books.module').then(m => m.BooksModule),
         canActivate: [authGuard]
       },
       {
@@ -12,7 +16,7 @@ const routes: Routes = [
         canActivate: [authGuard]
       },
       {
-        path: 'messages', loadChildren: () => import('./modules/messages/messages.module').then(m => m.MessagesModule),
+        path: 'requests', loadChildren: () => import('./modules/messages/messages.module').then(m => m.MessagesModule),
         canActivate: [authGuard]
       },
       {

@@ -18,6 +18,10 @@ public class Books {
     @Id
     private ObjectId id;
 
+
+    @Field("bookId")
+    private int bookId;
+
     @Field("title")
     private String title;
 

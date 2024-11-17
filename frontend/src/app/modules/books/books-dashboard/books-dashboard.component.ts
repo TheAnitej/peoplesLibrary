@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class BooksDashboardComponent {
 
+  tabChange(tab:Number){
+    console.log(tab)
+  }
+
 }

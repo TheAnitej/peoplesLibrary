@@ -32,4 +32,8 @@ export class MessagesDashboardComponent {
     this.chat = row;
     this.clickedRows.add(row);
   }
+
+  tabChange(tab:Number){
+    console.log(tab)
+  }
 }

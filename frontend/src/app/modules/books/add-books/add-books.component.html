@@ -23,17 +23,7 @@
                 </div>
             </ng-template>
         </p-stepperPanel>
-        <p-stepperPanel header="Files">
-            <ng-template pTemplate="content" let-prevCallback="prevCallback" let-index="index">
-                <div class="flex flex-column h-12rem">
-                  <app-book-img-upload [addBookForm]="addBookForm"></app-book-img-upload>
-                </div>
-                <div class="flex py-4">
-                    <p-button label="Back" severity="secondary" (onClick)="prevCallback.emit()" />
-                    <p-button label="Add Book" [disabled]="addBookForm.invalid" (onClick)="submit()" />
-                </div>
-            </ng-template>
-        </p-stepperPanel>
+        
     </p-stepper>
 </div>
 </p-card>

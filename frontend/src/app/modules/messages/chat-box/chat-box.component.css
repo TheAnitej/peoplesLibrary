@@ -24,6 +24,7 @@
   .chat-body {
     padding: 20px;
     height: 450px;
+  overflow-y: auto;
     align-self: baseline;
   }
   
@@ -104,3 +105,10 @@
   .overview{
     padding: 5%;
   }
+
+
+:host ::ng-deep {
+  .p-scroller-viewport {
+      flex: none;
+  }
+}

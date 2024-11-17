@@ -4,11 +4,9 @@ import { CommonModule } from '@angular/common';
 import { BooksRoutingModule } from './books-routing.module';
 import { AddBooksComponent } from './add-books/add-books.component';
 import { BooksDashboardComponent } from './books-dashboard/books-dashboard.component';
-import { AddBooksOverviewComponent } from './add-books-overview/add-books-overview.component';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RequestBookOverviewComponent } from './request-book-overview/request-book-overview.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepperModule } from 'primeng/stepper';
 import { BookInfoComponent } from './book-info/book-info.component';
@@ -34,22 +32,34 @@ import { DialogModule } from 'primeng/dialog';
 import { GalleriaModule } from 'primeng/galleria';
 import { MatTableModule } from '@angular/material/table';
 import { CarouselModule } from 'primeng/carousel';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LoadingInterceptor } from '../../shared/interceptors/LoadingInterceptor';
+
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { AllTransactionsComponent } from './all-transactions/all-transactions.component';
+import { TabViewModule } from 'primeng/tabview';
+import { YourBooksComponent } from './your-books/your-books.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { PaginatorModule } from 'primeng/paginator';
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
   declarations: [
     AddBooksComponent,
     BooksDashboardComponent,
-    AddBooksOverviewComponent,
-    RequestBookOverviewComponent,
     BookInfoComponent,
     BookConditionInfoComponent,
     BookImgUploadComponent,
     SearchBookComponent,
     AvailableBooksComponent,
-    DisplayImagesComponent    ],
+    DisplayImagesComponent,
+    AllTransactionsComponent,
+    YourBooksComponent,
+        ],
   imports: [
     CommonModule,
     BooksRoutingModule,
@@ -76,8 +86,16 @@ import { LoadingInterceptor } from '../../shared/interceptors/LoadingInterceptor
      DialogModule,
      GalleriaModule,
      MatTableModule,
-     CarouselModule
+     CarouselModule,
+     TableModule,
+     TabViewModule,
+     MessagesModule,
+     ConfirmDialogModule,
+     PaginatorModule,
+     CalendarModule,
+     IconFieldModule, InputIconModule, DropdownModule
       ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  providers:[ConfirmationService,MessageService]
   })
 export class BooksModule { }

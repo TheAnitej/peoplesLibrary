@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-request-book-overview',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './request-book-overview.component.css'
 })
 export class RequestBookOverviewComponent {
-  borrowedBooksCount=1
+  @Input() borrowedBooksCount=0
 }

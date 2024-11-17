@@ -40,7 +40,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
         .authorizeRequests()
-            .antMatchers("/auth/login", "/auth/verifyEmail", "/auth/updatePassword", "/auth/addNewUser")
+            .antMatchers("/auth/login", "/auth/verifyEmail", "/auth/updatePassword", "/auth/addNewUser","/verification")
             .permitAll() // Publicly accessible endpoints
             // .antMatchers("/api/**")
             .anyRequest()

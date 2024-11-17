@@ -42,7 +42,6 @@ public class AuthController {
     private AuthService authService;
 
 
-
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequestDTO loginRequest) {
         logger.info("in authenticateUser method..");
@@ -108,7 +107,11 @@ public class AuthController {
         
     }
 
-    // @post
+    @GetMapping("/getUserName")
+    public ResponseEntity<String> getUserName() throws Exception {
+        logger.info("in getUserName method..");
+        return ResponseEntity.ok(authService.getUserName());
+    }
     
     
 

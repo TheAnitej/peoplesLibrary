@@ -3,6 +3,7 @@ package com.library.applicationstarter.dtos;
 import java.io.File;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.Data;
 @Data
 public class BooksDTO {
 
+    private int bookId;
     private String title;
 private List<String> genres;
     private String author;

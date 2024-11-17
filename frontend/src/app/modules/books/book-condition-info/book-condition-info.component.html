@@ -1,7 +1,7 @@
 
 <form [formGroup]="addBookForm">
     <div class="row">
-        <div class="col-sm-7">
+        <div class="col-sm-6">
             <label class="label" for="bookCondition">Condition of the book:</label>
     
             <p-rating stars="7" formControlName="bookCondition"> 
@@ -15,17 +15,12 @@
                 </ng-template>
             </p-rating>
         </div>
-    
-    </div>
-    
-    <div class="row">
-        <div class="col-sm-7 days">
+        <div class="col-sm-6 days">
     
             <label class="label" for="lendBookFor">Duriation you are ready to lend the book:</label>
             <input type="text" pInputText  class="w-full mb-3" placeholder="In days"
              formControlName="lendBookFor"/>
         </div>
-    
     
     </div>
     <div class="row">
@@ -36,9 +31,9 @@
         <div class="col-sm-4">
             <p-inputOtp  [length]=6 [integerOnly]="true" (onChange)="getArea()" formControlName="pincode"/>
         </div>
-        <div class="col-sm-4">
+        <!-- <div class="col-sm-4">
             Area: {{area}}
-        </div>
+        </div> -->
     </div>
     <div class="row">
         <div class="col-sm-4">

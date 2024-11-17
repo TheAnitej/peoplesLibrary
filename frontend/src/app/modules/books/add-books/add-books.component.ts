@@ -26,8 +26,7 @@ constructor(private fb: FormBuilder, private _service : BooksService, private _a
       bookCondition:[0,[Validators.required]],
       lendBookFor:[,[Validators.required]],
       pincode:[,[Validators.required]],
-      isDeliverable:[,[Validators.required]],
-      images:[[],[]]
+      isDeliverable:[,[Validators.required]]
 
     });
 

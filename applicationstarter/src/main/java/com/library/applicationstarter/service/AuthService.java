@@ -14,4 +14,6 @@ public interface AuthService {
     public void updateUserPassword(String password,String email)  throws Exception ;
 
     public void addNewUser(LoginRequestDTO request);
+
+    public String getUserName() throws Exception;
 }
