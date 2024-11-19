@@ -23,9 +23,9 @@
             <div class="col-sm-4">
                 <p-inputOtp [(ngModel)]="pincode" (onChange)="getArea()" [length]=6 [integerOnly]="true" />
             </div>
-            <div class="col-sm-4">
+            <!-- <div class="col-sm-4">
                 Area: {{area}}
-            </div>
+            </div> -->
         </div>
         <p-button class="search"  (onClick)="search()" label="Search" />
     </p-card>

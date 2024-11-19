@@ -21,7 +21,7 @@ navItems: any;
     
     
     this.router.events.subscribe(() => {
-      this.sidebarVisible = !(this.router.url === '/login/login' || this.router.url === '/signup' || this.router.url === '/signup-user');
+      this.sidebarVisible = !(this.router.url === '/login/login' || this.router.url === '/signup' || this.router.url.includes('/signup-user'));
       if(!sessionStorage.getItem('username')){
         this.dashboardService.getUserName().subscribe(res=>{
           sessionStorage.setItem('username',res);

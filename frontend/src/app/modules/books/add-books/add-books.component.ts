@@ -42,6 +42,8 @@ constructor(private fb: FormBuilder, private _service : BooksService, private _a
     this._service.addBook(bookData).subscribe(res => {
       this._alert.add({severity: 'success', summary: 'Book Added', detail: 'Book added successfully' })
     });
+    this._alert.add({severity: 'success', summary: 'Book Added', detail: 'Book added successfully' })
+    window.location.reload();
   }
    
 
